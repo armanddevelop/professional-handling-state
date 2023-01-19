@@ -1,8 +1,14 @@
+import { ClassState } from "./Components/ClassState";
+import { UseState } from "./Components/UseState";
+import { GlobalStyle } from "./GlobalStyles";
+
 function App() {
   return (
-    <div className="App">
-      <h1>hola paches</h1>
-    </div>
+    <>
+      <GlobalStyle />
+      <UseState name="use State" />
+      <ClassState name="Class State" />
+    </>
   );
 }
 
