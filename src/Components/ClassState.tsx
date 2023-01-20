@@ -1,11 +1,12 @@
 import { Component } from "react";
-import { ClassStateProps, stateComponent } from "../interfaces/interfaces";
+import { ClassStateProps, StateComponent } from "../interfaces/interfaces";
 import { Loading } from "./Loading";
-
-class ClassState extends Component<ClassStateProps, stateComponent> {
-  state: stateComponent = {
+const SECURITY_CODE = "paradigma";
+class ClassState extends Component<ClassStateProps, StateComponent> {
+  state: StateComponent = {
     error: false,
     loading: false,
+    value: "",
   };
 
   componentDidMount(): void {
@@ -13,36 +14,41 @@ class ClassState extends Component<ClassStateProps, stateComponent> {
   }
   componentDidUpdate(
     prevProps: Readonly<ClassStateProps>,
-    prevState: Readonly<stateComponent>,
+    prevState: Readonly<StateComponent>,
     snapshot?: any
   ): void {
-    console.log("update the component");
-    console.log("Esto vale prevProps ", prevProps);
-    console.log("Esto vale prevState ", prevState);
-    const { loading } = this.state;
+    const { loading, value } = this.state;
     if (loading) {
       setTimeout(() => {
         this.setState({ loading: false });
+        SECURITY_CODE !== value
+          ? this.setState({ error: true })
+          : this.setState({ error: false, value: "" });
       }, 3000);
     }
   }
   // UNSAFE_componentWillMount(): void {
   //   console.log("Esto dentro del componentWillMount !!!!!");
   // }
+
   render() {
     const { name } = this.props;
-    console.log("esto vale this.state ", this.state);
+    const { value, error, loading } = this.state;
     return (
       <div>
         <h2> Eliminar {name}</h2>
         <p>Por favor, escribe el codigo de seguridad.</p>
-        {this.state.error && (
+        {error && !loading && (
           <p>
             <strong>Error:</strong> El codigo es incorrecto
           </p>
         )}
-        {this.state.loading && <Loading />}
-        <input placeholder="Codigo de seguridad" />
+        {loading && <Loading />}
+        <input
+          placeholder="Codigo de seguridad"
+          value={value}
+          onChange={(e) => this.setState({ value: e.target.value })}
+        />
         <button onClick={() => this.setState({ loading: !this.state.loading })}>
           Comprobar
         </button>
