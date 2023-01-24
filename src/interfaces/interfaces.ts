@@ -5,8 +5,8 @@ export interface StateComponent {
   error: boolean;
   loading: boolean;
   value: string;
-  active?: boolean;
-  delete?: boolean;
+  confirmed?: boolean;
+  deleted?: boolean;
 }
 
 export interface UseStateProps {

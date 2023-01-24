@@ -6,8 +6,8 @@ const initialState: StateComponent = {
   error: false,
   value: "",
   loading: false,
-  active: false,
-  delete: false,
+  confirmed: false,
+  deleted: false,
 };
 export const useCompountState = () => {
   const [compundState, setCompundState] =
@@ -27,6 +27,7 @@ export const useCompountState = () => {
               ...compundState,
               loading: false,
               error: false,
+              confirmed: true,
             });
       }, 3000);
     }
