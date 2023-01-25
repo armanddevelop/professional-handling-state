@@ -15,7 +15,7 @@ export const useCompountState = () => {
   const { loading } = compundState;
   useEffect(() => {
     const { loading, value } = compundState;
-    if (loading) {
+    if (loading && value !== undefined) {
       setTimeout(() => {
         value.trim().toLocaleLowerCase() !== SECURITY_CODE
           ? setCompundState({

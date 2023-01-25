@@ -1,12 +1,12 @@
 import { ClassState } from "./Components/ClassState";
-import { UseState } from "./Components/UseState";
+import { UseReducer } from "./Components/UseReducer";
 import { GlobalStyle } from "./GlobalStyles";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <UseState name="use State" />
+      <UseReducer name="use Reducer" />
       <ClassState name="Class State" />
     </>
   );
